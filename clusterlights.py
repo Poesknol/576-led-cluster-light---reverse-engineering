@@ -12,7 +12,7 @@ logging.getLogger('pygatt').setLevel(logging.DEBUG)
 
 # The BGAPI backend will attemt to auto-discover the serial device name of the
 # attached BGAPI-compatible USB adapter.
-#adapter = pygatt.GATTToolBackend()
+adapter = pygatt.GATTToolBackend()
 
 def load_config(filename):
     return json.load(open(configFile, "r"))
@@ -43,10 +43,10 @@ print binascii.hexlify(bytesToSend)
 
 try:
     print "henk"
-    #adapter.start()
-    #device = adapter.connect(mac)
-    #device.char_write_handle(handle, bytesToSend)
+    adapter.start()
+    device = adapter.connect(mac)
+    device.char_write_handle(handle, bytesToSend)
 
 finally:
     print "henk"
-    #adapter.stop()
+    adapter.stop()
