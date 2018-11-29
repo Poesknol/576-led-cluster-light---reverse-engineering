@@ -2,6 +2,7 @@
 import logging
 import json
 import sys
+import binascii
 
 
 configFile = "config.json"
@@ -18,8 +19,7 @@ def load_config(filename):
 
 def conf_to_bytearray(confValue):
     hex_string = confValue.replace(":", "")
-    byte_array = bytearray.fromhex(hex_string)
-    byte_array
+    return bytearray.fromhex(hex_string)
 
 def perc_to_hex(maxHex, minHex, percentage):
     raise NotImplementedError
@@ -27,22 +27,25 @@ def perc_to_hex(maxHex, minHex, percentage):
 def parse_command(command, config):
     if command in config["command"]:
         if command == "mode":
-           print "henkie"   
+            print "henkie"
+        elif command == "brightness":
+            print "shoarma"
         else:
-            conf_to_bytearray(config["command"][command])
+            return conf_to_bytearray(config["command"][command])
 
 
 
 command = sys.argv[1]
 config = load_config(configFile)
-#bytesToSend = parse_command(command, config)
+bytesToSend = parse_command(command, config)
 
-print command
+print binascii.hexlify(bytesToSend)
 
 try:
-    adapter.start()
-    device = adapter.connect(mac)
-    device.char_write_handle(handle, bytesToSend)
+    print "henk"
+    #adapter.start()
+    #device = adapter.connect(mac)
+    #device.char_write_handle(handle, bytesToSend)
 
 finally:
     print "henk"
