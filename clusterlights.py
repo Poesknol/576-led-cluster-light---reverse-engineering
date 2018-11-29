@@ -1,4 +1,4 @@
-#import pygatt
+import pygatt
 import logging
 import json
 import sys
