@@ -1,23 +1,22 @@
 {
-    "DEVICE":{
-        "mac": "24:35:CC:09:88:57",
-        "handle": 37
-    },
 
-    "POWER": {
+    "mac": "24:35:CC:09:88:57",
+    "handle": 37,
+    "brightnessMin": "03:01:01:0a",
+    "brightnessMax": "03:01:01:63",
+
+    "command": {
+      "brightness": "03:01:01:00",
       "on": "01:01:01:01",
       "off": "01:01:01:00",
-      "brightnessMin": "03:01:01:0a",
-      "brightnessMax": "03:01:01:63"
-    },
-
-    "COMMAND": {
-      "stayOn": "05:01:02:03:40",
-      "fadeAway": "05:01:02:03:10",
-      "fadeAwayInPhase": "05:01:02:03:04",
-      "wave": "05:01:02:03:01",
-      "fastTwinkling": "05:01:02:03:20",
-      "twinklingInPhase": "05:01:02:03:08",
-      "phasing": "05:01:02:03:02"
+      "mode": {
+        "stayOn": "05:01:02:03:40",
+        "fadeAway": "05:01:02:03:10",
+        "fadeAwayInPhase": "05:01:02:03:04",
+        "wave": "05:01:02:03:01",
+        "fastTwinkling": "05:01:02:03:20",
+        "twinklingInPhase": "05:01:02:03:08",
+        "phasing": "05:01:02:03:02"
+      }
     }
   }
