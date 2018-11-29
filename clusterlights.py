@@ -44,8 +44,8 @@ print binascii.hexlify(bytesToSend)
 try:
     print "henk"
     adapter.start()
-    device = adapter.connect(mac)
-    device.char_write_handle(handle, bytesToSend)
+    device = adapter.connect(config["mac"])
+    device.char_write_handle(config["handle"], bytesToSend)
 
 finally:
     print "henk"
