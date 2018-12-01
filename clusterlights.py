@@ -21,15 +21,29 @@ def conf_to_bytearray(confValue):
     hex_string = confValue.replace(":", "")
     return bytearray.fromhex(hex_string)
 
-def perc_to_hex(maxHex, minHex, percentage):
-    raise NotImplementedError
+def brightness_to_bytearray(percentage):
+    print "kakhoofd"
+    if percentage >= 0 and percentage <= 100:
+        value = int(mapping(percentage, 0, 100, config["brightnessMin"], config["brightnessMax"]))
+        hexValue = config["command"]["brightness"][:-2] + hex(value)[2:]
+        print hexValue
+        return conf_to_bytearray(hexValue)
+
+
+def mapping(value, leftMin, leftMax, rightMin, rightMax):
+    leftSpan = leftMax - leftMin
+    rightSpan = rightMax - rightMin
+
+    valueScaled = float(value - leftMin) / float(leftSpan)
+
+    return rightMin + (valueScaled * rightSpan)
 
 def parse_command(command, config):
     if command in config["command"]:
         if command == "mode":
             print "henkie"
         elif command == "brightness":
-            print "shoarma"
+            return brightness_to_bytearray(int(sys.argv[2]))
         else:
             return conf_to_bytearray(config["command"][command])
 
@@ -40,7 +54,6 @@ config = load_config(configFile)
 bytesToSend = parse_command(command, config)
 
 print binascii.hexlify(bytesToSend)
-
 try:
     print "henk"
     adapter.start()

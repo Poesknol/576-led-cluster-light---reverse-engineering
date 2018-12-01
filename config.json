@@ -2,8 +2,8 @@
 
     "mac": "24:35:CC:09:88:57",
     "handle": 37,
-    "brightnessMin": "03:01:01:0a",
-    "brightnessMax": "03:01:01:63",
+    "brightnessMin": 10,
+    "brightnessMax": 99,
 
     "command": {
       "brightness": "03:01:01:00",
