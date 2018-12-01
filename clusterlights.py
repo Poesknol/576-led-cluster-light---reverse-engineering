@@ -49,7 +49,7 @@ def parse_command(command, config):
             return brightness_to_bytearray(value)
 
         elif command == "brightness":
-            percentage = int(sys.argv[3])
+            percentage = int(sys.argv[2])
             return brightness_to_bytearray(percentage)
 
         else:
