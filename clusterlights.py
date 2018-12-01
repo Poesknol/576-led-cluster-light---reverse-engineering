@@ -62,11 +62,9 @@ config = load_config(configFile)
 bytesToSend = parse_command(command, config)
 
 try:
-    print "henk"
     adapter.start()
     device = adapter.connect(config["mac"])
     device.char_write_handle(config["handle"], bytesToSend)
 
 finally:
-    print "henk"
     adapter.stop()
