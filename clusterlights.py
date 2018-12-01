@@ -25,7 +25,7 @@ def brightness_to_bytearray(percentage):
     print "kakhoofd"
     if percentage >= 0 and percentage <= 100:
         value = int(mapping(percentage, 0, 100, config["brightnessMin"], config["brightnessMax"]))
-        hexValue = config["command"]["brightness"][:-2] + format(hex(value)[2:], '02x')
+        hexValue = config["command"]["brightness"][:-2] + format(value, '02x')
         print hexValue
         return conf_to_bytearray(hexValue)
 
