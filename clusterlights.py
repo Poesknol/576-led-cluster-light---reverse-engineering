@@ -46,8 +46,7 @@ def parse_command(command, config):
             for item in sys.argv[2:]:
                 value  = or_two_conf_values(value, config["command"]["mode"][item])
 
-            print brightness_to_bytearray(value)
-            return brightness_to_bytearray(value)
+            return conf_to_bytearray(value)
 
         elif command == "brightness":
             percentage = int(sys.argv[2])
