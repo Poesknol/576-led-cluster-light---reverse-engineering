@@ -1,4 +1,4 @@
-#import pygatt
+import pygatt
 import logging
 import json
 import sys
@@ -7,12 +7,12 @@ import binascii
 
 configFile = "config.json"
 
-#logging.basicConfig()
-#logging.getLogger('pygatt').setLevel(logging.DEBUG)
+logging.basicConfig()
+logging.getLogger('pygatt').setLevel(logging.DEBUG)
 
 # The BGAPI backend will attemt to auto-discover the serial device name of the
 # attached BGAPI-compatible USB adapter.
-#adapter = pygatt.GATTToolBackend()
+adapter = pygatt.GATTToolBackend()
 
 def load_config(filename):
     return json.load(open(configFile, "r"))
@@ -63,10 +63,10 @@ bytesToSend = parse_command(command, config)
 
 try:
     print "henk"
-   # adapter.start()
-    #device = adapter.connect(config["mac"])
-   # device.char_write_handle(config["handle"], bytesToSend)
+    adapter.start()
+    device = adapter.connect(config["mac"])
+    device.char_write_handle(config["handle"], bytesToSend)
 
 finally:
     print "henk"
-   # adapter.stop()
+    adapter.stop()
