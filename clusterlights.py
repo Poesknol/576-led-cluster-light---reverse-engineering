@@ -1,4 +1,4 @@
-import pygatt
+#import pygatt
 import logging
 import json
 import sys
@@ -7,12 +7,12 @@ import binascii
 
 configFile = "config.json"
 
-logging.basicConfig()
-logging.getLogger('pygatt').setLevel(logging.DEBUG)
+#logging.basicConfig()
+#logging.getLogger('pygatt').setLevel(logging.DEBUG)
 
 # The BGAPI backend will attemt to auto-discover the serial device name of the
 # attached BGAPI-compatible USB adapter.
-adapter = pygatt.GATTToolBackend()
+#adapter = pygatt.GATTToolBackend()
 
 def load_config(filename):
     return json.load(open(configFile, "r"))
@@ -22,13 +22,10 @@ def conf_to_bytearray(confValue):
     return bytearray.fromhex(hex_string)
 
 def brightness_to_bytearray(percentage):
-    print "kakhoofd"
     if percentage >= 0 and percentage <= 100:
         value = int(mapping(percentage, 0, 100, config["brightnessMin"], config["brightnessMax"]))
-        hexValue = config["command"]["brightness"][:-2] + format(value, '02x')
-        print hexValue
+        hexValue = config["brightness"][:-2] + format(value, '02x')
         return conf_to_bytearray(hexValue)
-
 
 def mapping(value, leftMin, leftMax, rightMin, rightMax):
     leftSpan = leftMax - leftMin
@@ -38,12 +35,23 @@ def mapping(value, leftMin, leftMax, rightMin, rightMax):
 
     return rightMin + (valueScaled * rightSpan)
 
+def or_two_conf_values(value, newValue):
+    newValue = int(value[12:], 16) | int(newValue[12:], 16)
+    return value[:-2] + format(newValue, '02x')
+
 def parse_command(command, config):
     if command in config["command"]:
         if command == "mode":
-            print "henkie"
+            value = config["baseMode"]
+            for item in sys.argv[2:]:
+                value  = or_two_conf_values(value, config["command"]["mode"][item])
+
+            return brightness_to_bytearray(value)
+
         elif command == "brightness":
-            return brightness_to_bytearray(int(sys.argv[2]))
+            percentage = int(sys.argv[2])
+            return brightness_to_bytearray(percentage)
+
         else:
             return conf_to_bytearray(config["command"][command])
 
@@ -53,13 +61,12 @@ command = sys.argv[1]
 config = load_config(configFile)
 bytesToSend = parse_command(command, config)
 
-print binascii.hexlify(bytesToSend)
 try:
     print "henk"
-    adapter.start()
-    device = adapter.connect(config["mac"])
-    device.char_write_handle(config["handle"], bytesToSend)
+   # adapter.start()
+    #device = adapter.connect(config["mac"])
+   # device.char_write_handle(config["handle"], bytesToSend)
 
 finally:
     print "henk"
-    adapter.stop()
+   # adapter.stop()

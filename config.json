@@ -1,14 +1,16 @@
 {
-
     "mac": "24:35:CC:09:88:57",
     "handle": 37,
+
+    "brightness": "03:01:01:00",
     "brightnessMin": 10,
     "brightnessMax": 99,
+    "baseMode": "05:01:02:03:00",
 
     "command": {
-      "brightness": "03:01:01:00",
       "on": "01:01:01:01",
-      "off": "01:01:01:00",
+      "off": "01:01:01:00", 
+      
       "mode": {
         "stayOn": "05:01:02:03:40",
         "fadeAway": "05:01:02:03:10",
