@@ -24,7 +24,7 @@ def conf_to_bytearray(confValue):
 def brightness_to_bytearray(percentage):
     if percentage >= 0 and percentage <= 100:
         value = int(mapping(percentage, 0, 100, config["brightnessMin"], config["brightnessMax"]))
-        hexValue = config["brightness"][:-2] + format(value, '02x')
+        hexValue = config["command"]["brightness"][:-2] + format(value, '02x')
         return conf_to_bytearray(hexValue)
 
 def mapping(value, leftMin, leftMax, rightMin, rightMax):
